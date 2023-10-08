@@ -8,4 +8,8 @@
     <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
   </PropertyGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="$(ProjectDir)tailwindwatch.sh" />
+	</Target>
+
 </Project>
