@@ -5,5 +5,5 @@ appStylesPathIn="./Styles/app.css"
 appStylesPathOut="./wwwroot/app.css"
 
 if ! pgrep tailwindcss > /dev/null; then
-  $tailwindPath -i $appStylesPathIn -o $appStylesPathOut --watch
+  nohup $tailwindPath -i $appStylesPathIn -o $appStylesPathOut --watch > /dev/null 2>&1 &
 fi
