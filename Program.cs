@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using SmartEstimate.Components;
 using SmartEstimate.Services;
 using SmartEstimate.Modal;
@@ -9,6 +11,17 @@ builder.Services.AddRazorComponents()
     .AddServerComponents();
 builder.Services.AddSingleton<ModalService>();
 builder.Services.AddSingleton<QuoteService>();
+
+builder.Services.AddWebOptimizer(pipeline =>
+{
+    pipeline.AddCssBundle("/css/bundle.css", "wwwroot/css/**/*.css")
+            .MinifyCss()
+            .UseContentRoot();
+
+    pipeline.AddJavaScriptBundle("/js/bundle.js", "wwwroot/js/**/*.js")
+            .MinifyJavaScript() 
+            .UseContentRoot();
+});
 
 var app = builder.Build();
 
