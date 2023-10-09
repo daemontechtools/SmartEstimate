@@ -1,0 +1,17 @@
+﻿@using SmartEstimate.Services
+
+@page "/";
+@page "/quotes";
+
+@inject QuoteService QuoteService
+
+<h3 class="bind-prop-header">Quotes</h3>
+
+@code {
+    private List<Quote> _quotes = new();
+
+    protected override void OnInitialized()
+    {
+       _quotes = QuoteService.GetQuotes();
+    }
+}

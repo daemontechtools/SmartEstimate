@@ -1,0 +1,36 @@
+﻿@namespace SmartEstimate.Transition
+
+@ChildContent
+
+
+@code {
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public bool Show { get; set; }
+    [Parameter]
+    public int Duration { get; set; } = 300;
+    [Parameter]
+    public Transition.TransitionState TransitionState { get; set; } = Transition.TransitionState.Exited;
+    [Parameter]
+    public EventCallback<Transition.TransitionState> OnTransitionStateChange { get; set; } = EventCallback<Transition.TransitionState>.Empty;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Show && TransitionState != Transition.TransitionState.Entering && TransitionState != Transition.TransitionState.Entered)
+        {
+            await Task.Delay(5);
+            await OnTransitionStateChange.InvokeAsync(Transition.TransitionState.Entering);
+            await Task.Delay(Duration);
+            await OnTransitionStateChange.InvokeAsync(Transition.TransitionState.Entered);
+        }
+        else if (!Show && TransitionState != Transition.TransitionState.Exiting && TransitionState != Transition.TransitionState.Exited)
+        {
+            await OnTransitionStateChange.InvokeAsync(Transition.TransitionState.Exiting);
+            await Task.Delay(Duration);
+            await OnTransitionStateChange.InvokeAsync(Transition.TransitionState.Exited);
+        }
+    }
+}

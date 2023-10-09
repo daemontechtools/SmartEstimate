@@ -1,0 +1,23 @@
+﻿@namespace SmartEstimate.Nav
+
+
+ <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+    <div class="flex min-h-0 flex-1 flex-col bg-stone-800">
+        <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+            <div class="ml-4">
+                <img class="w-36" src="images/muskokaLogo.png" />
+            </div>
+            <div class="mt-6 flex-1 space-y-1 px-2">
+                @ChildContent
+            </div>
+        </div>
+        <NavProfile Name="Josh Elias" />
+    </div>
+</div>
+
+@code {
+    private string NavMenuTitle { get; set; } = "Title";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

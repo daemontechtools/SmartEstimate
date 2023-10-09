@@ -1,10 +1,14 @@
-using smart_estimate.Components;
+using SmartEstimate.Components;
+using SmartEstimate.Services;
+using SmartEstimate.Modal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddServerComponents();
+builder.Services.AddSingleton<ModalService>();
+builder.Services.AddSingleton<QuoteService>();
 
 var app = builder.Build();
 

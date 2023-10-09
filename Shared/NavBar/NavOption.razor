@@ -1,0 +1,54 @@
+﻿@namespace SmartEstimate.Nav
+@using Microsoft.AspNetCore.Components.Routing
+@using SmartEstimate.Icons
+@inject NavigationManager NavigationManager
+
+
+<NavLink 
+    href=@OptionPath
+    class="
+        group flex items-center
+        px-2 py-2
+        text-sm font-medium
+        rounded-md
+        cursor-pointer select-none
+        text-stone-100 hover:text-stone-400
+        hover:bg-stone-700 hover:bg-opacity-75
+        no-underline hover:no-underline
+    "
+    ActiveClass="bg-stone-900"
+>
+    <div class="mr-4 h-6 w-6 flex-shrink-0 opacity-60">
+        @if (Icon != null)
+        { 
+            @Icon
+        }
+    </div>
+    @Title
+</NavLink>
+
+@code {
+
+    [Parameter]
+    public string Title { get; set; } = "Default Title";
+
+    [Parameter]
+    public string OptionPath { get; set; } = "/";    
+
+    [Parameter]
+    public Type? IconType { get; set; }
+
+    private RenderFragment? Icon { get; set; }
+
+    private string CurrentUrl { get; set; } = "/";
+
+    protected override void OnInitialized()
+    {
+        if(IconType != null)
+        {
+            Icon = IconHelper.TypeToRenderFragment(IconType);
+        }
+        
+        base.OnInitialized();
+    }
+}

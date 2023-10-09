@@ -1,0 +1,25 @@
+﻿@namespace SmartEstimate.Nav
+
+
+<div class="flex flex-shrink-0 border-t border-stone-950 p-4">
+    <div class="group block w-full flex-shrink-0">
+        <div class="group block w-full flex-shrink-0">
+            <div class="flex items-center">
+                <div>
+                    <img src="/images/joshy.jpg?width=40&quality=80" class="w-10 h-10 rounded-full inline-block" />
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-bold text-white mb-0">@Name</p>
+                    <p class="text-xs font-bold text-stone-300 group-hover:text-white m-0 cursor-pointer">
+                        View profile
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = "Red";
+}

@@ -1,0 +1,62 @@
+﻿@namespace SmartEstimate.Transition
+
+
+@if(Show || _transitionState != Transition.TransitionState.Exited)
+{
+    <TransitionChild
+        Show=@Show
+        Duration=@Duration
+        TransitionState=@_transitionState
+        OnTransitionStateChange=@SetTransitionState>
+        @ChildContent
+    </TransitionChild>
+}
+
+@code {
+
+    public enum TransitionState
+    {
+        Entering,
+        Entered,
+        Exiting,
+        Exited
+    }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public bool Show { get; set; }
+    [Parameter]
+    public int Duration { get; set; } = 500;
+    [Parameter]
+    public EventCallback<TransitionState> OnTransitionStateChange { get; set; } = EventCallback<TransitionState>.Empty;
+
+    private TransitionState _transitionState = TransitionState.Exited;
+
+
+    private async Task SetTransitionState(TransitionState state)
+    {
+        if (_transitionState != state)
+        {
+            _transitionState = state;
+            await OnTransitionStateChange.InvokeAsync(state);
+        }
+    }
+
+    public static string GetTransitionClass(TransitionState state)
+    {
+        switch (state)
+        {
+            case TransitionState.Entering:
+                return "entering";
+            case TransitionState.Entered:
+                return "entered";
+            case TransitionState.Exiting:
+                return "exiting";
+            case TransitionState.Exited:
+                return "exited";
+            default:
+                return "exited";
+        }
+    }
+}

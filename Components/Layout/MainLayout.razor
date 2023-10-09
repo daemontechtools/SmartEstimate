@@ -1,23 +1,73 @@
-﻿@inherits LayoutComponentBase
+﻿@using SmartEstimate.Nav
+@using SmartEstimate.Modal
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<PageTitle>Blazor Demo App</PageTitle>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+<div class="h-screen">
+    <SideNav>
+        @foreach (var option in @NavOptions)
+        {
+            <NavOption 
+                OptionPath=@option.OptionPath
+                Title=@option.Title
+                IconType=@option.IconType
+            />
+        }
+    </SideNav>
+    <ContentView>
+        @Body
+    </ContentView>
+    <Modal />
 </div>
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+@code {
+    public struct IconType<T> where T : BaseSvgIcon { }
+
+    public struct NavOptionInput
+    {
+        public string OptionPath;
+        public string Title;
+        public Type IconType;
+    }
+
+    public NavOptionInput[] NavOptions = new NavOptionInput[]
+    {
+        new NavOptionInput()
+        {
+            OptionPath = "/quotes",
+            Title = "Quotes",
+            IconType = typeof(ClipboardIcon)
+        },
+        new NavOptionInput()
+        {
+            OptionPath = "/users",
+            Title = "Users",
+            IconType = typeof(UsersIcon)
+        },
+        new NavOptionInput()
+        {
+            OptionPath = "/settings",
+            Title = "Settings",
+            IconType = typeof(SettingsIcon)
+        },
+        new NavOptionInput()
+        {
+            OptionPath = "/learnBlazor/bindprop",
+            Title = "BindProp",
+            IconType = typeof(CakeIcon)
+        },
+        new NavOptionInput()
+        {
+            OptionPath = "/category",
+            Title = "Category",
+            IconType = typeof(CakeIcon)
+        },
+        new NavOptionInput()
+        {
+            OptionPath = "/product",
+            Title = "Product",
+            IconType = typeof(CakeIcon)
+        }
+    };
+}

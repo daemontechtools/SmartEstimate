@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using SmartEstimate.Transition
+@namespace SmartEstimate.Modal
+@inject ModalService _modalService
+
+
+<Transition 
+    Show=@_modalService.Visible 
+    Duration=@TransitionDuration 
+    OnTransitionStateChange=@OnTransitionStateChange
+>
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div 
+            class=@($@"
+                fixed inset-0 bg-gray-500
+                bg-opacity-75 transition ease-in-out modal-overlay
+                {Transition.GetTransitionClass(_transitionState)}"
+                )
+             style=@($"transition-duration: {TransitionDuration}ms;")>
+        </div>
+
+        <div class="fixed inset-0 overflow-y-auto"
+            @onclick=@_modalService.Hide>
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class=@($@"
+                    relative z-10 overflow-hidden
+                    rounded-lg bg-white px-4 pb-4 pt-5 text-left
+                    shadow-xl sm:my-8 sm:w-full
+                    sm:max-w-lg sm:p-6 transition ease-in-out modal 
+                    {Transition.GetTransitionClass(_transitionState)}")
+                    style=@($"transition-duration: {TransitionDuration}ms;")
+                    @onclick:stopPropagation=true
+                    @onclick:preventDefault=true>
+                    @if (_modalService.Content != null)
+                    {
+                        @_modalService.Content
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</Transition>
+
+
+@code {
+    [Parameter]
+    public int TransitionDuration { get; set; } = 200;
+
+    private Transition.TransitionState _transitionState = Transition.TransitionState.Exited;
+
+
+    protected override void OnInitialized()
+    {
+        _modalService.OnStateChange += OnModalStateChanged!;
+    }
+
+    private async void OnModalStateChanged(object sender, bool show)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void OnTransitionStateChange(Transition.TransitionState state)
+    {
+        _transitionState = state;
+    }
+
+    private void Dispose()
+    {
+        _modalService.OnStateChange -= OnModalStateChanged!;
+    }
+}
