@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "Styles/bundle.css",
+    "inputFiles": [
+      "Styles/app.css",
+      "Styles/site.css",
+      "obj/Debug/net8.0/scopedcss/projectbundle/SmartEstimate.bundle.scp.css"
+    ]
+  }
+]

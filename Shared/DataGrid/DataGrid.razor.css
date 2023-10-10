@@ -1,0 +1,40 @@
+﻿
+::deep table {
+    @apply min-w-full divide-y divide-gray-300;
+}
+
+
+::deep thead {
+    @apply bg-gray-50;
+}
+
+::deep th:not(:last-child) {
+    @apply text-left text-sm font-semibold text-gray-900;
+}
+::deep th:first-child {
+    @apply py-3.5 pl-4 pr-3 sm:pl-6;
+}
+::deep th:last-child {
+    @apply relative py-3.5 pl-3 pr-4 sm:pr-6;
+}
+::deep th:not(:first-child):not(:last-child) {
+    @apply px-3 py-3.5;
+}
+
+
+::deep tbody {
+    @apply divide-y divide-gray-200 bg-white;
+}
+
+::deep td {
+    @apply whitespace-nowrap text-sm py-4;
+}
+::deep td:first-child {
+    @apply pl-4 pr-3 font-medium text-gray-900 sm:pl-6;
+}
+::deep td:not(:first-child):not(:last-child) {
+    @apply text-gray-500 px-3;
+}
+::deep td:last-child {
+    @apply relative pl-3 pr-4 text-right sm:pr-6;
+}

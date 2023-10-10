@@ -11,17 +11,10 @@ builder.Services.AddRazorComponents()
     .AddServerComponents();
 builder.Services.AddSingleton<ModalService>();
 builder.Services.AddSingleton<QuoteService>();
-
-builder.Services.AddWebOptimizer(pipeline =>
-{
-    pipeline.AddCssBundle("/css/bundle.css", "wwwroot/css/**/*.css")
-            .MinifyCss()
-            .UseContentRoot();
-
-    pipeline.AddJavaScriptBundle("/js/bundle.js", "wwwroot/js/**/*.js")
-            .MinifyJavaScript() 
-            .UseContentRoot();
-});
+// builder.Services.AddWebOptimizer(pipeline =>
+// {
+//     pipeline.AddCssBundle("/css/bundle.css", "css/a.css", "css/b.css").UseContentRoot();
+// });
 
 var app = builder.Build();
 
@@ -29,8 +22,11 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
+
+
 }
 
+//app.UseWebOptimizer();
 app.UseStaticFiles();
 
 app.MapRazorComponents<App>()

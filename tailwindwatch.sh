@@ -1,9 +1,8 @@
 #!/bin/bash
 
 tailwindPath="/usr/bin/tailwindcss"
-appStylesPathIn="./Styles/app.css"
-appStylesPathOut="./wwwroot/css/app.css"
+appStylesPathIn="./Styles/bundle.css"
+appStylesPathOut="./wwwroot/css/bundle.css"
 
-if ! pgrep tailwindcss > /dev/null; then
-  nohup $tailwindPath -i $appStylesPathIn -o $appStylesPathOut --watch > /dev/null 2>&1 &
-fi
+
+$tailwindPath -i $appStylesPathIn -o $appStylesPathOut
