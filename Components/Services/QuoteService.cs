@@ -1,14 +1,17 @@
-﻿namespace SmartEstimate.Services;
-using SmartEstimate.Models;
+﻿using SmartEstimate.Models;
+using SmartEstimate.Mock;
 
+namespace SmartEstimate.Services;
+
+// Will be responsible for managine quotes
+// Get, Create, Update, Delete
 public class QuoteService
 {
-    //public List<Quote> Quotes { get; set; } = new();
-    Dictionary<int, Quote> QuoteMap = new(); //myList.ToDictionary(o => o.Id);
+    private Dictionary<int, Quote> _quoteDict = MockQuote.GetMockQuoteDict();
 
     public List<Quote> GetQuotes()
     {
-        return QuoteMap.Values.ToList();
+        return _quoteDict.Values.ToList();
     }
 }
 
