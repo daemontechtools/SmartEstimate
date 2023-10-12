@@ -1,17 +1,35 @@
-@page "/quotes/{quoteId:int}";
+@page "/";
+@page "/quotes";
 
-@inject QuoteService QuoteService
+@using SmartEstimate.Nav
+@using SmartEstimate.Models
 
-<h3 class="bind-prop-header">Quotes</h3>
+@inject QuoteService _quoteService
+
+
+<div class="container bg-gray-100 h-full py-10">
+    <ContentViewHeader />
+    <DataGridWrapper>
+        <DataGrid Items="@quotes">
+            <PropertyColumn 
+                TGridItem="Quote" 
+                TProp="string" 
+                Property="@(q => q.Name)" 
+                Sortable="true" 
+            />
+            <TemplateColumn TGridItem="Quote">
+                <button>Hire</button>
+                <button>Fire</button>
+            </TemplateColumn>
+        </DataGrid>
+    </DataGridWrapper>
+</div>
 
 @code {
-
-    [Parameter]
-    public int QuoteId { get; set; }
-
-    private List<Quote> _quotes = new();
+    public IQueryable<Quote> quotes;
 
     protected override void OnInitialized()
     {
+        quotes = _quoteService.GetQuotesAsQueryable();
     }
 }

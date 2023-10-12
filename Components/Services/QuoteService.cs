@@ -7,11 +7,11 @@ namespace SmartEstimate.Services;
 // Get, Create, Update, Delete
 public class QuoteService
 {
-    private Dictionary<int, Quote> _quoteDict = MockQuote.GetMockQuoteDict();
+    private static Dictionary<int, Quote> _quoteDict = QuoteMock.GetQuoteMockDict();
 
-    public List<Quote> GetQuotes()
+    public IQueryable<Quote> GetQuotesAsQueryable()
     {
-        return _quoteDict.Values.ToList();
+        return _quoteDict.Values.AsQueryable();
     }
 }
 

@@ -2,9 +2,9 @@ using SmartEstimate.Models;
 
 namespace SmartEstimate.Mock;
 
-public static class MockQuote {
+public static class QuoteMock {
 
-    public static Dictionary<int, Quote> GetMockQuoteDict()
+    public static Dictionary<int, Quote> GetQuoteMockDict()
     {
         return new Dictionary<int, Quote>
         {
