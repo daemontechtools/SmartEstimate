@@ -1,6 +1,10 @@
-﻿@tailwind base;
+﻿@import "../obj/Debug/net8.0/scopedcss/projectbundle/SmartEstimate.bundle.scp.css";
+@import "site.css";
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer base {
     html {

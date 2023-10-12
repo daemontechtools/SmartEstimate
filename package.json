@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "postcss Styles/app.css Styles/site.css obj/Debug/net8.0/scopedcss/projectbundle/SmartEstimate.bundle.scp.css --dir dist"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.3"
+  }
+}

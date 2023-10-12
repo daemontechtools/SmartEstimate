@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="$(ProjectDir)build.sh" />
+    <Exec Command="$(ProjectDir)tailwindwatch.sh" />
 	</Target>
 
 </Project>
