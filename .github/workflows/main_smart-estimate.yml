@@ -18,7 +18,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.100-rc.1.23463.5'
+          dotnet-version: '8.0.100-rc.2.23502.2'
       - uses: actions/cache@v3
         with:
           path: ~/.nuget/packages
@@ -27,7 +27,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget
       - name: Install dependencies
-        run: dotnet add package Microsoft.AspNetCore.Components.QuickGrid --version 8.0.0-rc.1.23421.29
+        run: dotnet add package Microsoft.AspNetCore.Components.QuickGrid --version 8.0.0-rc.2.23480.2
         
       - name: Build with dotnet
         run: dotnet build --configuration Release
