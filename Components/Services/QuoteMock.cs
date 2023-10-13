@@ -35,7 +35,7 @@ public static class QuoteMock {
                 IsApartment = false,
                 IsMultiLevel = false,
                 IsFreightForwarder = false,
-                QuoteStatus = "Pending",
+                Status = QuoteStatus.Draft,
                 CatelogPdfUrl = "https://example.com/catalog.pdf",
                 Rooms = new List<Room> {
                     new Room {
@@ -122,7 +122,7 @@ public static class QuoteMock {
                 IsApartment = true,
                 IsMultiLevel = false,
                 IsFreightForwarder = false,
-                QuoteStatus = "Accepted",
+                Status = QuoteStatus.Draft,
                 CatelogPdfUrl = "https://example.com/catalog.pdf",
                 Rooms = new List<Room> {
                     new Room {
