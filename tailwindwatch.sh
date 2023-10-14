@@ -2,7 +2,7 @@
 
 appStylesPathOut="./wwwroot/css/bundle.css"
 
-if [ "$ASPNETCORE_ENVIRONMENT" == "Production" ]; then
+if [ "$APP_MODE" == "Production" ]; then
   appStylesPathIn="./Styles/main.production.css"
   echo "Building for production"
   $TAILWINDCSS -i $appStylesPathIn -o $appStylesPathOut
