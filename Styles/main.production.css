@@ -1,7 +1,7 @@
-﻿@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "app.css";
+﻿@import "app.css";
 @import "site.css";
 @import "../obj/Release/net8.0/scopedcss/projectbundle/SmartEstimate.bundle.scp.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
