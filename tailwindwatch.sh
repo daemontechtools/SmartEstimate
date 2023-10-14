@@ -1,14 +1,20 @@
 #!/bin/bash
 
+appStylesPathOut="./wwwroot/css/bundle.css"
+
 if [ "$ASPNETCORE_ENVIRONMENT" == "Production" ]; then
   appStylesPathIn="./Styles/main.production.css"
+  echo "Building for production"
+  $TAILWINDCSS -i $appStylesPathIn -o $appStylesPathOut
+
 else
   appStylesPathIn="./Styles/main.development.css"
+  echo "Building for development"
+
+  if ! pgrep tailwindcss > /dev/null; then
+    echo "Starting tailwindcss"
+    /usr/bin/tailwindcss -i $appStylesPathIn -o $appStylesPathOut --watch &
+  fi
 fi
 
 appStylesPathOut="./wwwroot/css/bundle.css"
-
-
-if ! pgrep tailwindcss > /dev/null; then
-  nohup $TAILWINDCSS -i $appStylesPathIn -o $appStylesPathOut --watch > /dev/null 2>&1 &
-fi
