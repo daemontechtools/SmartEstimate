@@ -6,11 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <StaticWebAssetBasePath>$(ProjectDir)/_content/$(PackageId)</StaticWebAssetBasePath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="8.0.0-rc.2.23480.2" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="$(ProjectDir)tailwindwatch.sh" />
   </Target>
 
