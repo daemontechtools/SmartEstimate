@@ -10,5 +10,8 @@ public struct Room
     public DrawerHardware DrawerHardware { get; set; }
     public float SubTotal { get; set; }
     public List<Product> Products { get; set; }
+
+
+    public DbProps DbProps{ get; set; }
 }
 

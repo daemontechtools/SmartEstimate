@@ -1,4 +1,6 @@
-﻿namespace SmartEstimate.Models;
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace SmartEstimate.Models;
 
 
 public enum QuoteStatus
@@ -26,5 +28,8 @@ public struct Quote
     public string CatelogPdfUrl { get; set; }
 
     public List<Room> Rooms { get; set; }
+
+
+    public DbProps DbProps{ get; set; }
 }
 

@@ -14,5 +14,7 @@ public struct Product
     public float Price { get; set; }
     public string EXT { get; set; }
     public string Name { get; set; }
+
+    public DbProps DbProps{ get; set; }
 }
 

@@ -7,4 +7,7 @@ public struct ShippingAddress {
     public string City { get; set; }
     public string Ontario { get; set; }
     public string PostalCode { get; set; }
+
+
+    public DbProps DbProps{ get; set; }
 }
