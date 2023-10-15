@@ -4,7 +4,7 @@
 
 <PageTitle>SmartEstimate</PageTitle>
 
-<div class="h-screen">
+<div class="h-screen bg-gray-100">
     <SideNav>
         @foreach (var option in @NavOptions)
         {
@@ -41,8 +41,8 @@
         },
         new NavOptionInput()
         {
-            OptionPath = "/users",
-            Title = "Users",
+            OptionPath = "/contact",
+            Title = "Contact",
             IconType = typeof(UsersIcon)
         },
         new NavOptionInput()
@@ -51,23 +51,5 @@
             Title = "Settings",
             IconType = typeof(SettingsIcon)
         },
-        new NavOptionInput()
-        {
-            OptionPath = "/learnBlazor/bindprop",
-            Title = "BindProp",
-            IconType = typeof(CakeIcon)
-        },
-        new NavOptionInput()
-        {
-            OptionPath = "/category",
-            Title = "Category",
-            IconType = typeof(CakeIcon)
-        },
-        new NavOptionInput()
-        {
-            OptionPath = "/product",
-            Title = "Product",
-            IconType = typeof(CakeIcon)
-        }
     };
 }

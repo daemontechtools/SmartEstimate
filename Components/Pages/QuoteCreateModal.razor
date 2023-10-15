@@ -1,0 +1,13 @@
+@using SmartEstimate.Icons
+@using SmartEstimate.Modal
+
+@inject ModalService _modalService
+
+@inherits ModalContent
+                
+<ModalContent
+    Color="sky-500"
+    Title="Create New Quote"
+    IconType=typeof(ClipboardIcon)
+    OnConfirm=@OnConfirm 
+ />

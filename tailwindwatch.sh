@@ -10,10 +10,5 @@ if [ "$APP_MODE" == "Production" ]; then
 else
   appStylesPathIn="./Styles/main.development.css"
   echo "Building for development"
-
-  if ! pgrep tailwindcss > /dev/null; then
-    echo "Starting tailwindcss"
-    /usr/bin/tailwindcss -i $appStylesPathIn -o $appStylesPathOut
-    /usr/bin/tailwindcss -i $appStylesPathIn -o $appStylesPathOut --watch &
-  fi
+  /usr/bin/tailwindcss -i $appStylesPathIn -o $appStylesPathOut
 fi

@@ -4,27 +4,47 @@
 @inject QuoteService _quoteService
 
 
-<div class="container bg-gray-100 h-full py-10">
-    <ContentViewHeader />
+<div class="container bg-gray-100 h-full py-10 m-0">
+    <ContentViewHeader 
+        Title="Quotes"
+        Description="A list of all your quotes including their name, sales associate and created and last updated dates"
+        ButtonLabel="Add Quote"
+        OnClick=@AddQuote
+    />
     <DataGridWrapper>
         <DataGrid Items=@_quotes>
             <PropertyColumn 
-                TGridItem="Quote" 
-                TProp="string" 
-                Title="Quote Name"
-                Property="@(q => q.Name)" 
+                TGridItem=Quote
+                TProp=string
+                Title="Name"
+                Property=@(q => q.Name)
                 Sortable="true" 
             />
             <PropertyColumn 
-                TGridItem="Quote" 
-                TProp="string" 
+                TGridItem=Quote 
+                TProp=QuoteStatus
+                Title="Status"
+                Property=@(q => q.Status)
+                Sortable=true
+            />
+            <PropertyColumn 
+                TGridItem=Quote 
+                TProp=string 
                 Title="Sales Associate"
-                Property="@(q => q.SalesAssociate)"
-                Sortable="true" 
+                Property=@(q => q.SalesAssociate)
+                Sortable=true
+            />
+            <PropertyColumn 
+                TGridItem=Quote 
+                TProp=DateTime 
+                Title="Last Updated"
+                Property=@(q => q.DbProps.UpdatedAt)
+                Format="HH:mm tt MMMM d, yyyy"
+                Sortable=true 
             />
             <TemplateColumn TGridItem="Quote">
-                <button>it</button>
-                <button>Fire</button>
+                <button>Delete</button>
+                <button>Edit</button>
             </TemplateColumn>
         </DataGrid>
     </DataGridWrapper>
@@ -36,5 +56,10 @@
     protected override void OnInitialized()
     {
         _quotes = _quoteService.GetQuotesAsQueryable();
+    }
+
+    private async Task AddQuote()
+    {
+        Console.WriteLine("Add Quote :)");
     }
 }

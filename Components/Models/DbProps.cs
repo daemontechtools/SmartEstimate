@@ -1,7 +1,7 @@
 namespace SmartEstimate.Models;
 
 
-public abstract class DbProps
+public struct DbProps
 {
     public int Id { get; set; }
     public DateTime CreatedAt { get; set; }

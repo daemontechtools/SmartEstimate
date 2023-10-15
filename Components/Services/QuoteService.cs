@@ -13,5 +13,12 @@ public class QuoteService
     {
         return _quoteDict.Values.AsQueryable();
     }
+
+    // Get a single quote
+    // Get all quotes
+    // Get quotes as queryable
+    // Create a quote
+    // Update a quote
+    // Delete a quote
 }
 
