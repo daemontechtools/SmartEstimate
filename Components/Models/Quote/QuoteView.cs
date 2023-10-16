@@ -1,19 +1,13 @@
-﻿using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartEstimate.Models;
 
+public struct QuoteView {
 
-public enum QuoteStatus
-{
-    Draft,
-    InReview,
-    Approved,
-}
-
-public struct Quote
-{
-    public int Id { get; set; }
+    [Required]
     public string Name { get; set; }
+
+    [Required]
     public QuoteStatus Status  { get; set; }
     public string SalesAssociate { get; set; }
     public string ContactInfo { get; set; }
@@ -28,8 +22,4 @@ public struct Quote
     public string CatelogPdfUrl { get; set; }
 
     public List<Room> Rooms { get; set; }
-
-
-    public DbProps DbProps{ get; set; }
 }
-

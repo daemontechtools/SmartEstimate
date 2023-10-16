@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Watch Include="./wwwroot/css/bundle.css" />
+    <Watch Include="./Styles/**/*.css" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -1,0 +1,38 @@
+
+<button onclick=@OnClick>
+    @Icon
+</button>
+
+@code {
+
+    [Parameter]
+    public Type? IconType { get; set; }
+
+    private RenderFragment? Icon { get; set; }
+
+    private string CurrentUrl { get; set; } = "/";
+
+    protected override void OnInitialized()
+    {
+        if(IconType != null)
+        {
+            Icon = IconHelper.TypeToRenderFragment(IconType);
+        }
+        
+        base.OnInitialized();
+    }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    private async Task HandleButtonClick()
+    {
+        await OnClick.InvokeAsync();
+    }
+}
+
+
+@* 
+"dotnetAcquisitionExtension.existingDotnetPath": [
+        {"extensionId": "msazurermtools.azurerm-vscode-tools", "path": "/usr/local/share/dotnet/dotnet"}
+    ] *@

@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Components;
+
 namespace SmartEstimate.Icons;
 
 public static class IconHelper

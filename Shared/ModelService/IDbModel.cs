@@ -1,7 +1,7 @@
-namespace SmartEstimate.Models;
+namespace SmartEstimate.ModelService;
 
 
-public struct DbProps
+public interface IDbModel
 {
     public int Id { get; set; }
     public DateTime CreatedAt { get; set; }
