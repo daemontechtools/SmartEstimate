@@ -1,4 +1,4 @@
-namespace SmartEstimate.ModelService;
+namespace Daemon.DataStore;
 
 
 public interface IDbModel

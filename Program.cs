@@ -1,5 +1,6 @@
+using AutoMapper;
 using SmartEstimate.Components;
-using SmartEstimate.Services;
+using SmartEstimate.Models;
 using SmartEstimate.Modal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+var mapperConfig = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile<SmartEstimateMappingProfile>();
+});
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddSingleton<ModalService>();
-builder.Services.AddSingleton<QuoteService>();
+builder.Services.AddScoped<QuoteStore>();
 
 var app = builder.Build();
 

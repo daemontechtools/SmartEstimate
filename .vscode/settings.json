@@ -1,0 +1,12 @@
+{
+    "dotnetAcquisitionExtension.existingDotnetPath": [
+        {
+            "extensionId": "ms-dotnettools.csharp", 
+            "path": "/home/josh/.asdf/shims/dotnet"
+        },
+        {
+            "extensionId": "ms-dotnettools.csdevkit", 
+            "path": "/home/josh/.asdf/shims/dotnet"
+        }
+    ]
+}

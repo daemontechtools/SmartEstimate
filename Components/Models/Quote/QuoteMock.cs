@@ -1,15 +1,19 @@
-using SmartEstimate.Models;
+using Daemon.DataStore;
 
-namespace SmartEstimate.Mock;
 
-public static class QuoteMock {
+namespace SmartEstimate.Models;
 
-    public static Dictionary<int, Quote> GetQuoteMockDict()
-    {
-        return new Dictionary<int, Quote>
+public struct QuoteMock : IModelMockData<Quote> {
+
+    public QuoteMock() {}
+
+    public SortedDictionary<int, Quote> MockModelDict { get; set; }
+        = new SortedDictionary<int, Quote>
         {
             { 1, new Quote {
-                DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                Id = 1,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
                 Name = "Quote 1",
                 SalesAssociate = "John Doe",
                 ContactInfo = "johndoe@example.com",
@@ -39,32 +43,44 @@ public static class QuoteMock {
                 CatelogPdfUrl = "https://example.com/catalog.pdf",
                 Rooms = new List<Room> {
                     new Room {
-                        DbProps = new DbProps { CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        Id = 2,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
                         Name = "Room 1",
                         DoorStyle = new DoorStyle {
-                            DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 3,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Style 1",
                             Price = 100.0f
                         },
                         Finish = new Finish {
-                            DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 4,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Finish 1",
                             Price = 50.0f
                         },
                         Interior = new Interior {
-                            DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 5,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Interior 1",
                             Price = 75.0f
                         },
                         DrawerHardware = new DrawerHardware {
-                            DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 6,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Hardware 1",
                             Price = 25.0f
                         },
                         SubTotal = 250.0f,
                         Products = new List<Product> {
                             new Product {
-                                DbProps = new DbProps { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 6,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P1",
                                 Width = 10.0f,
                                 Height = 20.0f,
@@ -78,7 +94,9 @@ public static class QuoteMock {
                                 Name = "Product 1"
                             },
                             new Product {
-                                DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 7,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P2",
                                 Width = 15.0f,
                                 Height = 25.0f,
@@ -95,8 +113,10 @@ public static class QuoteMock {
                     }
                 }
             }},
-            { 2, new Quote {
-                DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        { 2, new Quote {
+                Id = 10,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
                 Name = "Quote 2",
                 SalesAssociate = "Jane Smith",
                 ContactInfo = "janesmith@example.com",
@@ -126,32 +146,32 @@ public static class QuoteMock {
                 CatelogPdfUrl = "https://example.com/catalog.pdf",
                 Rooms = new List<Room> {
                     new Room {
-                        DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        Id = 7,
                         Name = "Room 1",
                         DoorStyle = new DoorStyle {
-                            DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 5,
                             Name = "Style 1",
                             Price = 100.0f
                         },
                         Finish = new Finish {
-                            DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 6,
                             Name = "Finish 1",
                             Price = 50.0f
                         },
                         Interior = new Interior {
-                            DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 7,
                             Name = "Interior 1",
                             Price = 75.0f
                         },
                         DrawerHardware = new DrawerHardware {
-                            DbProps = new DbProps { Id = 2, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 8,
                             Name = "Hardware 1",
                             Price = 25.0f
                         },
                         SubTotal = 250.0f,
                         Products = new List<Product> {
                             new Product {
-                                DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 9,
                                 Code = "P1",
                                 Width = 10.0f,
                                 Height = 20.0f,
@@ -165,7 +185,7 @@ public static class QuoteMock {
                                 Name = "Product 1"
                             },
                             new Product {
-                                DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 10,
                                 Code = "P2",
                                 Width = 15.0f,
                                 Height = 25.0f,
@@ -181,32 +201,32 @@ public static class QuoteMock {
                         }
                     },
                     new Room {
-                        DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        Id = 11,
                         Name = "Room 2",
                         DoorStyle = new DoorStyle {
-                            DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 12,
                             Name = "Style 2",
                             Price = 200.0f
                         },
                         Finish = new Finish {
-                            DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 13,
                             Name = "Finish 2",
                             Price = 100.0f
                         },
                         Interior = new Interior {
-                            DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 14,
                             Name = "Interior 2",
                             Price = 150.0f
                         },
                         DrawerHardware = new DrawerHardware {
-                            DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 15,
                             Name = "Hardware 2",
                             Price = 50.0f
                         },
                         SubTotal = 500.0f,
                         Products = new List<Product> {
                             new Product {
-                                DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 16,
                                 Code = "P3",
                                 Width = 20.0f,
                                 Height = 30.0f,
@@ -220,7 +240,7 @@ public static class QuoteMock {
                                 Name = "Product 3"
                             },
                             new Product {
-                                DbProps = new DbProps { Id = 6, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 17,
                                 Code = "P4",
                                 Width = 25.0f,
                                 Height = 35.0f,
@@ -238,11 +258,14 @@ public static class QuoteMock {
                 }
             }},
             { 3, new Quote {
-                DbProps = new DbProps { Id = 3, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                Id = 3,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
                 Name = "Quote 3",
                 SalesAssociate = "Bob Johnson",
                 ContactInfo = "bobjohnson@example.com",
                 DealerAddress = new ShippingAddress {
+                    Id = 4,
                     Name = "Dealer 3",
                     Line1 = "456 Main St",
                     Line2 = "",
@@ -251,6 +274,7 @@ public static class QuoteMock {
                     PostalCode = "V6H 1K2"
                 },
                 CustomerAddress = new ShippingAddress {
+                    Id = 5,
                     Name = "Customer 3",
                     Line1 = "789 Pine St",
                     Line2 = "",
@@ -268,32 +292,44 @@ public static class QuoteMock {
                 CatelogPdfUrl = "https://example.com/catalog.pdf",
                 Rooms = new List<Room> {
                     new Room {
-                        DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        Id = 6,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
                         Name = "Room 1",
                         DoorStyle = new DoorStyle {
-                            DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 7,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Style 1",
                             Price = 100.0f
                         },
                         Finish = new Finish {
-                            DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 8,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Finish 1",
                             Price = 50.0f
                         },
                         Interior = new Interior {
-                            DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 9,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Interior 1",
                             Price = 75.0f
                         },
                         DrawerHardware = new DrawerHardware {
-                            DbProps = new DbProps { Id = 4, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 10,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Hardware 1",
                             Price = 25.0f
                         },
                         SubTotal = 250.0f,
                         Products = new List<Product> {
                             new Product {
-                                DbProps = new DbProps { Id = 7, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 11,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P1",
                                 Width = 10.0f,
                                 Height = 20.0f,
@@ -307,7 +343,9 @@ public static class QuoteMock {
                                 Name = "Product 1"
                             },
                             new Product {
-                                DbProps = new DbProps { Id = 8, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 12,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P2",
                                 Width = 15.0f,
                                 Height = 25.0f,
@@ -323,32 +361,44 @@ public static class QuoteMock {
                         }
                     },
                     new Room {
-                        DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                        Id = 13,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
                         Name = "Room 2",
                         DoorStyle = new DoorStyle {
-                            DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 14,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Style 2",
                             Price = 200.0f
                         },
                         Finish = new Finish {
-                            DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 15,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Finish 2",
                             Price = 100.0f
                         },
                         Interior = new Interior {
-                            DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 16,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Interior 2",
                             Price = 150.0f
                         },
                         DrawerHardware = new DrawerHardware {
-                            DbProps = new DbProps { Id = 5, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                            Id = 17,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
                             Name = "Hardware 2",
                             Price = 50.0f
                         },
                         SubTotal = 500.0f,
                         Products = new List<Product> {
                             new Product {
-                                DbProps = new DbProps { Id = 9, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 18,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P3",
                                 Width = 20.0f,
                                 Height = 30.0f,
@@ -362,7 +412,9 @@ public static class QuoteMock {
                                 Name = "Product 3"
                             },
                             new Product {
-                                DbProps = new DbProps { Id = 10, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                                Id = 19,
+                                CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 Code = "P4",
                                 Width = 25.0f,
                                 Height = 35.0f,
@@ -379,6 +431,6 @@ public static class QuoteMock {
                     }
                 }
             }
-        }};
-    }
-};
+        }
+    };
+}

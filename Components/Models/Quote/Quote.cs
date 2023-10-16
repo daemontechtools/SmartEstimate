@@ -1,5 +1,7 @@
-﻿namespace SmartEstimate.Models;
+﻿using Daemon.DataStore;
 
+
+namespace SmartEstimate.Models;
 
 public enum QuoteStatus
 {

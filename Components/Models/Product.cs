@@ -1,8 +1,14 @@
-﻿namespace SmartEstimate.Models;
+﻿using Daemon.DataStore;
 
-public struct Product
+
+namespace SmartEstimate.Models;
+
+public struct Product : IDbModel
 {
     public int Id { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+
     public string Code { get; set; }
     public float Width { get; set; }
     public float Height { get; set; }
@@ -14,7 +20,5 @@ public struct Product
     public float Price { get; set; }
     public string EXT { get; set; }
     public string Name { get; set; }
-
-    public DbProps DbProps{ get; set; }
 }
 
