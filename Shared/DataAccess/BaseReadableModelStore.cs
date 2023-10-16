@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Immutable;
+using AutoMapper;
 
 namespace Daemon.DataStore;
 
@@ -27,8 +28,11 @@ public struct BaseReadableModelStore<D, V>
 
     public Task<SortedDictionary<int, V>> GetAll(bool refresh, Func<V, bool> predicate)
     {
-        IEnumerable<KeyValuePair<int, D>> filteredDict = Storage.ModelDict.Where(kvp => predicate(Mapper.Map<V>(kvp.Value)));
-        IEnumerable<KeyValuePair<int, V>> mappedDict = filteredDict.Select(kvp => new KeyValuePair<int, V>(kvp.Key, Mapper.Map<V>(kvp.Value)));
-        return new SortedDictionary<int, V>(mappedDict);
+        IMapper mapper = Mapper;
+        Dictionary<int, V> result = Storage.ModelDict
+            .Where(kvp => predicate(mapper.Map<V>(kvp.Value)))
+            .ToDictionary(kvp => kvp.Key, kvp => mapper.Map<V>(kvp.Value));
+        SortedDictionary<int, V> sortedDictionary = new SortedDictionary<int, V>(result, Comparer<int>.Default);
+        return Task.FromResult(sortedDictionary);
     }
 }
