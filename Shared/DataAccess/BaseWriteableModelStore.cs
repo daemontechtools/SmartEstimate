@@ -1,18 +1,27 @@
+using AutoMapper;
+
 namespace Daemon.DataStore;
 
 public struct BaseWriteableModelStore<D, V> 
     : IWriteableModelStore<V>
     where D : IDbModel
+    where V : IDbModel
 {
-    IModelStorage<D> Storage { get; }
+    public IModelStorage<D> Storage { get; }
+    public IMapper Mapper { get; }
 
-    public BaseWriteableModelStore(IModelStorage<D> storage) {
+    public BaseWriteableModelStore(
+        IModelStorage<D> storage,
+        IMapper mapper
+    ) {
         Storage = storage;
+        Mapper = mapper;
     }
 
-    public async Task<V?> Create(V viewModel)
+    public Task<V?> Create(V viewModel)
     {
-        V? newViewModel = await Repository.Create(viewModel);
+        Storage.Models.
+        Storage.Models. Append<V>(viewModel); .Add(viewModel.Id, Mapper.Map<D>(viewModel));
         ModelDict.Add(newViewModel.Id, newViewModel);
         StateChanged();
         return newViewModel;

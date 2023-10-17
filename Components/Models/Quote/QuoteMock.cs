@@ -7,10 +7,10 @@ public struct QuoteMock : IModelMockData<Quote> {
 
     public QuoteMock() {}
 
-    public SortedDictionary<int, Quote> MockModelDict { get; set; }
-        = new SortedDictionary<int, Quote>
+    public IList<Quote> MockModelDict { get; set; }
+        = new List<Quote>
         {
-            { 1, new Quote {
+            new Quote {
                 Id = 1,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
@@ -112,8 +112,8 @@ public struct QuoteMock : IModelMockData<Quote> {
                         }
                     }
                 }
-            }},
-                        { 2, new Quote {
+            },
+            new Quote {
                 Id = 10,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
@@ -256,8 +256,8 @@ public struct QuoteMock : IModelMockData<Quote> {
                         }
                     }
                 }
-            }},
-            { 3, new Quote {
+            },
+            new Quote {
                 Id = 3,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
@@ -431,6 +431,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                     }
                 }
             }
-        }
+        
     };
 }

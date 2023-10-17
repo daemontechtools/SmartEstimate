@@ -1,8 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using Daemon.DataStore;
 
 namespace SmartEstimate.Models;
 
-public struct QuoteView {
+public struct QuoteView : IDbModel {
+
+    public int Id { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+
 
     [Required]
     public string Name { get; set; }

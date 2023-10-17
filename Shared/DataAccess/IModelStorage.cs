@@ -1,7 +1,7 @@
 namespace Daemon.DataStore;
 
 public interface IModelStorage<D> where D : IDbModel {
-    SortedDictionary<int, D> ModelDict { get; set;}
+    IList<D> Models { get; set;}
     event EventHandler? OnStateChanged;
     void StateChanged();
 }
