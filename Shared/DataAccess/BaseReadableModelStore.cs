@@ -13,7 +13,8 @@ public struct BaseReadableModelStore<D, V>
 
     public BaseReadableModelStore(
         IModelStorage<D> storage,
-        IMapper mapper) {
+        IMapper mapper
+    ) {
         Mapper = mapper;
         Storage = storage;
     }
@@ -24,13 +25,16 @@ public struct BaseReadableModelStore<D, V>
         return Task.FromResult<V?>(Mapper.Map<V>(model));
     }
 
-    public Task<IList<V>> GetAll(bool refresh, Func<V, bool> predicate)
-    {
+    public Task<List<V>> GetAll(
+        bool refresh = false, 
+        Func<V, bool>? predicate = null
+    ) {
         IMapper mapper = Mapper;
-        IList<V> result = Storage.Models
-            .Where(m => predicate(mapper.Map<V>(m)))
-            .Select(m => mapper.Map<V>(m))
-            .ToList();
+        IEnumerable<D> models = Storage.Models;
+        if (predicate != null) {
+            models = models.Where(m => predicate(mapper.Map<V>(m)));
+        }
+        List<V> result = models.Select(m => mapper.Map<V>(m)).ToList();
         return Task.FromResult(result);
     }
 }

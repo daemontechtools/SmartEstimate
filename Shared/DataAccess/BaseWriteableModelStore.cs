@@ -1,5 +1,6 @@
 using AutoMapper;
 
+
 namespace Daemon.DataStore;
 
 public struct BaseWriteableModelStore<D, V> 
@@ -18,39 +19,29 @@ public struct BaseWriteableModelStore<D, V>
         Mapper = mapper;
     }
 
-    public Task<V?> Create(V viewModel)
+    public Task<V> Create(V viewModel)
     {
-        Storage.Models.
-        Storage.Models. Append<V>(viewModel); .Add(viewModel.Id, Mapper.Map<D>(viewModel));
-        ModelDict.Add(newViewModel.Id, newViewModel);
-        StateChanged();
-        return newViewModel;
+        D newModel = Mapper.Map<D>(viewModel);
+        Storage.Models.Add(newModel);
+        Storage.StateChanged();
+        return Task.FromResult(viewModel);
     }
 
-    public async Task<bool> Delete(int id)
+    public Task Delete(int id)
     {
-        try
-        {
-            await Repository.Delete(id);
-        }
-        catch
-        {
-            return false;
-        }
-        ModelDict.Remove(id);
-        StateChanged();
-        return true;
+        Storage.Models.Remove(Storage.Models.First(m => m.Id == id));
+        Storage.StateChanged();
+        return Task.CompletedTask;
     }
 
-
-    public async Task<V?> Update(V viewModel)
+    public Task Update(V viewModel)
     {
-        V? newViewModel = await Repository.Update(viewModel);
-        if (newViewModel != null)
-        {
-            ModelDict[newViewModel.Id] = newViewModel;
-            StateChanged();
+        D newModel = Mapper.Map<D>(viewModel);
+        int index = Storage.Models.FindIndex(m => m.Id == viewModel.Id);
+        if (index >= 0) {
+            Storage.Models[index] = newModel;
+            Storage.StateChanged();
         }
-        return newViewModel;
+        return Task.CompletedTask;
     }
 }

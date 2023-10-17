@@ -7,7 +7,7 @@ public struct QuoteMock : IModelMockData<Quote> {
 
     public QuoteMock() {}
 
-    public IList<Quote> MockModelDict { get; set; }
+    public List<Quote> MockModels { get; set; }
         = new List<Quote>
         {
             new Quote {

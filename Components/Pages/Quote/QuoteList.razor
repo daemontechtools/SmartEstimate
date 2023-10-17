@@ -1,7 +1,7 @@
 @page "/"
 @page "/quotes"
 
-@inject QuoteService _quoteService
+@inject QuoteStore _quoteStore
 
 
 <div class="container bg-gray-100 h-full py-10 m-0">
@@ -55,7 +55,8 @@
 
     protected override void OnInitialized()
     {
-        _quotes = _quoteService.GetQuotesAsQueryable();
+        List<QuoteView> quoteList = _quoteStore.ReadableStore.GetAll();
+        _quotes = quoteList.AsQueryable();
     }
 
     private async Task AddQuote()
