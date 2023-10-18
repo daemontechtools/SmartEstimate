@@ -87,7 +87,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 5.0f,
                                 Left = true,
                                 Right = false,
-                                Int = 1,
                                 Comments = "",
                                 Price = 100.0f,
                                 EXT = "",
@@ -103,7 +102,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 10.0f,
                                 Left = false,
                                 Right = true,
-                                Int = 2,
                                 Comments = "",
                                 Price = 150.0f,
                                 EXT = "",
@@ -178,7 +176,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 5.0f,
                                 Left = true,
                                 Right = false,
-                                Int = 1,
                                 Comments = "",
                                 Price = 100.0f,
                                 EXT = "",
@@ -192,7 +189,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 10.0f,
                                 Left = false,
                                 Right = true,
-                                Int = 2,
                                 Comments = "",
                                 Price = 150.0f,
                                 EXT = "",
@@ -233,7 +229,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 15.0f,
                                 Left = true,
                                 Right = false,
-                                Int = 3,
                                 Comments = "",
                                 Price = 200.0f,
                                 EXT = "",
@@ -247,7 +242,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 20.0f,
                                 Left = false,
                                 Right = true,
-                                Int = 4,
                                 Comments = "",
                                 Price = 300.0f,
                                 EXT = "",
@@ -336,7 +330,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 5.0f,
                                 Left = true,
                                 Right = false,
-                                Int = 1,
                                 Comments = "",
                                 Price = 100.0f,
                                 EXT = "",
@@ -352,7 +345,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 10.0f,
                                 Left = false,
                                 Right = true,
-                                Int = 2,
                                 Comments = "",
                                 Price = 150.0f,
                                 EXT = "",
@@ -405,7 +397,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 15.0f,
                                 Left = true,
                                 Right = false,
-                                Int = 3,
                                 Comments = "",
                                 Price = 200.0f,
                                 EXT = "",
@@ -421,7 +412,6 @@ public struct QuoteMock : IModelMockData<Quote> {
                                 Depth = 20.0f,
                                 Left = false,
                                 Right = true,
-                                Int = 4,
                                 Comments = "",
                                 Price = 300.0f,
                                 EXT = "",
@@ -431,6 +421,125 @@ public struct QuoteMock : IModelMockData<Quote> {
                     }
                 }
             }
-        
-    };
+        };
+
+    static public QuoteView GenerateRandomQuoteView() {
+        var random = new Random();
+
+        var quoteView = new QuoteView
+        {
+            Id = random.Next(1, 1000),
+            CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+            UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+            Name = $"Quote {random.Next(1, 100)}",
+            SalesAssociate = $"Sales Associate {random.Next(1, 10)}",
+            ContactInfo = $"salesassociate{random.Next(1, 10)}@example.com",
+            DealerAddress = new ShippingAddress
+            {
+                Name = $"Dealer {random.Next(1, 10)}",
+                Line1 = $"{random.Next(1, 100)} Main St",
+                Line2 = "",
+                City = "Toronto",
+                Ontario = "ON",
+                PostalCode = $"M{random.Next(1, 9)}{random.Next(1, 9)}{random.Next(1, 9)} {random.Next(1, 9)}{random.Next(1, 9)}{random.Next(1, 9)}"
+            },
+            CustomerAddress = new ShippingAddress
+            {
+                Name = $"Customer {random.Next(1, 10)}",
+                Line1 = $"{random.Next(1, 1000)} Elm St",
+                Line2 = "",
+                City = "Mississauga",
+                Ontario = "ON",
+                PostalCode = $"L{random.Next(1, 9)}{random.Next(1, 9)}{random.Next(1, 9)} {random.Next(1, 9)}{random.Next(1, 9)}{random.Next(1, 9)}"
+            },
+            IsPickup = random.Next(0, 2) == 1,
+            IsDelivery = random.Next(0, 2) == 1,
+            IsDealer = random.Next(0, 2) == 1,
+            IsApartment = random.Next(0, 2) == 1,
+            IsMultiLevel = random.Next(0, 2) == 1,
+            IsFreightForwarder = random.Next(0, 2) == 1,
+            Status = (QuoteStatus)random.Next(0, 4),
+            CatelogPdfUrl = "https://example.com/catalog.pdf",
+            Rooms = new List<Room>
+            {
+                new Room
+                {
+                    Id = random.Next(1, 1000),
+                    CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                    UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                    Name = $"Room {random.Next(1, 10)}",
+                    DoorStyle = new DoorStyle
+                    {
+                        Id = random.Next(1, 1000),
+                        CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        Name = $"Style {random.Next(1, 10)}",
+                        Price = (float)random.NextDouble() * 100
+                    },
+                    Finish = new Finish
+                    {
+                        Id = random.Next(1, 1000),
+                        CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        Name = $"Finish {random.Next(1, 10)}",
+                        Price = (float)random.NextDouble() * 100
+                    },
+                    Interior = new Interior
+                    {
+                        Id = random.Next(1, 1000),
+                        CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        Name = $"Interior {random.Next(1, 10)}",
+                        Price = (float)random.NextDouble() * 100
+                    },
+                    DrawerHardware = new DrawerHardware
+                    {
+                        Id = random.Next(1, 1000),
+                        CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                        Name = $"Hardware {random.Next(1, 10)}",
+                        Price = (float)random.NextDouble() * 100
+                    },
+                    SubTotal = (float)random.NextDouble() * 1000,
+                    Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = random.Next(1, 1000),
+                            CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                            UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                            Code = $"P{random.Next(1, 10)}",
+                            Width = (float)random.NextDouble() * 100,
+                            Height = (float)random.NextDouble() * 100,
+                            Depth = (float)random.NextDouble() * 100,
+                            Left = random.Next(0, 2) == 1,
+                            Right = random.Next(0, 2) == 1,
+                            Comments = "",
+                            Price = (float)random.NextDouble() * 100,
+                            EXT = "",
+                            Name = $"Product {random.Next(1, 10)}"
+                        },
+                        new Product
+                        {
+                            Id = random.Next(1, 1000),
+                            CreatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                            UpdatedAt = DateTime.Now.AddDays(-random.Next(1, 30)),
+                            Code = $"P{random.Next(1, 10)}",
+                            Width = (float)random.NextDouble() * 100,
+                            Height = (float)random.NextDouble() * 100,
+                            Depth = (float)random.NextDouble() * 100,
+                            Left = random.Next(0, 2) == 1,
+                            Right = random.Next(0, 2) == 1,
+                            Comments = "",
+                            Price = (float)random.NextDouble() * 100,
+                            EXT = "",
+                            Name = $"Product {random.Next(1, 10)}"
+                        }
+                    }
+                }
+            }
+        };
+
+        return quoteView;
+    }
 }

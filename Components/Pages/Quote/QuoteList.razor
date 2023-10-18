@@ -1,78 +1,65 @@
+@using SmartEstimate.Animation
+
 @page "/"
 @page "/quotes"
 
-@inject QuoteStore _quoteStore
+@namespace SmartEstimate.Pages
 
 
 <div class="container bg-gray-100 h-full py-10 m-0">
-    <ContentViewHeader 
-        Title="Quotes"
-        Description="A list of all your quotes including their name, sales associate and created and last updated dates"
-        ButtonLabel="Add Quote"
-        OnClick=@AddQuote
-    />
-    <DataGridWrapper>
-        <DataGrid Items=@_quotes>
-            <PropertyColumn 
-                TGridItem=Quote
-                TProp=string
-                Title="Name"
-                Property=@(q => q.Name)
-                Sortable="true" 
-            />
-            <PropertyColumn 
-                TGridItem=Quote 
-                TProp=QuoteStatus
-                Title="Status"
-                Property=@(q => q.Status)
-                Sortable=true
-            />
-            <PropertyColumn 
-                TGridItem=Quote 
-                TProp=string 
-                Title="Sales Associate"
-                Property=@(q => q.SalesAssociate)
-                Sortable=true
-            />
-            <PropertyColumn 
-                TGridItem=Quote 
-                TProp=DateTime 
-                Title="Last Updated"
-                Property=@(q => q.UpdatedAt)
-                Format="HH:mm tt MMMM d, yyyy"
-                Sortable=true 
-            />
-            <TemplateColumn TGridItem="Quote" Class="flex justify-end">
-                <EditIcon Class="cursor-pointer mr-3 hover:stroke-sky-500 duration-300 ease-in-out" />
-                <TrashIcon Class="cursor-pointer hover:stroke-rose-500 duration-300 ease-in-out" />
-            </TemplateColumn>
-        </DataGrid>
-    </DataGridWrapper>
+    @if(IsLoading) {
+        <Spinner Class="text-stone-400 dark:text-stone-400 fill-orange-600" />
+    } else if(!_quotes.Any()) {
+        <span>No Quotes Available</span>
+    } else {
+        <ContentViewHeader 
+            @rendermode="RenderMode.InteractiveServer"
+            Title="Quotes"
+            Description="A list of all your quotes including their name, sales associate and created and last updated dates"
+            ButtonLabel="Add Quote"
+            OnClick=AddQuote
+        />
+        <DataGridWrapper>
+            <DataGrid Items=_quotes>
+                <PropertyColumn 
+                    TGridItem=QuoteView
+                    TProp=string
+                    Title="Name"
+                    Property=@(q => q.Name)
+                    Sortable="true" 
+                />
+                <PropertyColumn 
+                    TGridItem=QuoteView 
+                    TProp=QuoteStatus
+                    Title="Status"
+                    Property=@(q => q.Status)
+                    Sortable=true
+                />
+                <PropertyColumn 
+                    TGridItem=QuoteView 
+                    TProp=string 
+                    Title="Sales Associate"
+                    Property=@(q => q.SalesAssociate)
+                    Sortable=true
+                />
+                <PropertyColumn 
+                    TGridItem=QuoteView 
+                    TProp=DateTime 
+                    Title="Last Updated"
+                    Property=@(q => q.UpdatedAt)
+                    Format="HH:mm tt MMMM d, yyyy"
+                    Sortable=true 
+                />
+                <TemplateColumn TGridItem=QuoteView Class="flex justify-end">
+                    <EditIcon Class="
+                        w-4 h-4
+                        cursor-pointer 
+                        mr-3 
+                        hover:stroke-sky-500 
+                        duration-300 ease-in-out" />
+                    <TrashIcon Class="cursor-pointer hover:stroke-rose-500 duration-300 ease-in-out" />
+                </TemplateColumn>
+            </DataGrid>
+        </DataGridWrapper>
+    }
 </div>
-
-@code {
-    private IQueryable<Quote> _quotes;
-
-    protected override void OnInitialized()
-    {
-        List<QuoteView> quoteList = _quoteStore.ReadableStore.GetAll();
-        _quotes = quoteList.AsQueryable();
-    }
-
-    private async Task AddQuote()
-    {
-        Console.WriteLine("Add Quote");
-    }
-
-    private async Task EditQuote()
-    {
-        Console.WriteLine("Edit Quote");
-    }
-
-    private async Task DeleteQuote()
-    {
-        Console.WriteLine("Delete Quote");
-    }
-}
-
-@* https://github.com/dotnet/vscode-dotnet-runtime/blob/main/Documentation/troubleshooting-runtime.md *@

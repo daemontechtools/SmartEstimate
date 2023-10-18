@@ -1,6 +1,6 @@
-﻿@page "/quotes/{quoteId:int}";
+﻿@page "/quotes/{quoteId:int}"
 
-@inject QuoteService QuoteService
+@inject QuoteStore _quoteStore
 
 <h3 class="bind-prop-header">Quotes</h3>
 
@@ -9,9 +9,10 @@
     [Parameter]
     public int QuoteId { get; set; }
 
-    private List<Quote> _quotes = new();
+    private QuoteView _quote = new();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        _quote = await _quoteStore.ReadableStore.GetById(QuoteId);
     }
 }

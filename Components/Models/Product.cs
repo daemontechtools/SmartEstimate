@@ -15,7 +15,6 @@ public struct Product : IDbModel
     public float Depth { get; set; }
     public bool Left { get; set; }
     public bool Right { get; set; }
-    public ushort Int { get; set; }
     public string Comments { get; set; }
     public float Price { get; set; }
     public string EXT { get; set; }
