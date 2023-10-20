@@ -25,7 +25,7 @@
   <Target Name="ProcessScopedCssFileWithTailwind">
     <Message Importance="high"
             Text="Processing with Tailwind: $(CurrentScopedCssFile)" />
-    <Exec Command="/usr/bin/tailwindcss -i $(CurrentScopedCssFile) -o $(CurrentScopedCssFile)"
+    <Exec Command="$(TAILWINDCSS) -i $(CurrentScopedCssFile) -o $(CurrentScopedCssFile)"
           WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
