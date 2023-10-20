@@ -1,4 +1,8 @@
-﻿@namespace SmartEstimate.Nav
+﻿@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+
+
+@namespace SmartEstimate.Nav
 
 @inject ILoggerFactory LoggerFactory
 
@@ -56,6 +60,6 @@
 
     private void TestButton()
     {
-        LoggerFactory.CreateLogger("TestButton").LogInformation("TestButton");
+        LoggerFactory.CreateLogger("TestButton").LogInformation("I click da button");
     }
 }

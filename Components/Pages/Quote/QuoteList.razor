@@ -13,7 +13,6 @@
         <span>No Quotes Available</span>
     } else {
         <ContentViewHeader 
-            @rendermode="RenderMode.InteractiveServer"
             Title="Quotes"
             Description="A list of all your quotes including their name, sales associate and created and last updated dates"
             ButtonLabel="Add Quote"
@@ -52,7 +51,7 @@
                 />
                 <TemplateColumn TGridItem=QuoteView Class="flex justify-end">
                     <EditIcon Class="
-                        w-4 h-4
+                        w-3 h-3
                         cursor-pointer 
                         mr-3 
                         hover:stroke-sky-500 
