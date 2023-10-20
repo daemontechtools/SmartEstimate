@@ -3,6 +3,7 @@
 @page "/"
 @page "/quotes"
 
+
 @namespace SmartEstimate.Pages
 
 
@@ -50,13 +51,14 @@
                     Sortable=true 
                 />
                 <TemplateColumn TGridItem=QuoteView Class="flex justify-end">
-                    <EditIcon Class="
-                        w-3 h-3
+                    <TrashIcon Class="
+                        w-[22px]
                         cursor-pointer 
-                        mr-3 
-                        hover:stroke-sky-500 
-                        duration-300 ease-in-out" />
-                    <TrashIcon Class="cursor-pointer hover:stroke-rose-500 duration-300 ease-in-out" />
+                        stroke-gray-400
+                        hover:stroke-rose-500 
+                        duration-300 
+                        ease-in-out" 
+                    />
                 </TemplateColumn>
             </DataGrid>
         </DataGridWrapper>

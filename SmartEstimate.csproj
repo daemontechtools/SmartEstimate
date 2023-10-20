@@ -15,8 +15,23 @@
     <Watch Include="./Styles/**/*.css" />
   </ItemGroup>
 
+  <Target Name="ProcessScopedCssFilesWithTailwind" AfterTargets="_GenerateScopedCssFiles">
+    <MSBuild Projects="$(MSBuildProjectFile)"
+            Properties="CurrentScopedCssFile=%(_ScopedCssOutputs.Identity)"
+            Targets="ProcessScopedCssFileWithTailwind">
+    </MSBuild>
+  </Target>
+
+  <Target Name="ProcessScopedCssFileWithTailwind">
+    <Message Importance="high"
+            Text="Processing with Tailwind: $(CurrentScopedCssFile)" />
+    <Exec Command="/usr/bin/tailwindcss -i $(CurrentScopedCssFile) -o $(CurrentScopedCssFile)"
+          WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="$(ProjectDir)tailwindwatch.sh" />
   </Target>
+
 
 </Project>

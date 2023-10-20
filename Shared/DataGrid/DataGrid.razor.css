@@ -3,38 +3,37 @@
     @apply min-w-full divide-y divide-gray-300;
 }
 
-
-::deep thead {
+::deep .quickgrid[theme=default] thead {
     @apply bg-gray-50;
 }
 
-::deep th:not(:last-child) {
+::deep .quickgrid[theme=default] th:not(:last-child) {
     @apply text-left text-sm font-semibold text-gray-900;
 }
-::deep th:first-child {
+::deep .quickgrid[theme=default] th:first-child {
     @apply py-3.5 pl-4 pr-3 sm:pl-6;
 }
-::deep th:last-child {
+::deep .quickgrid[theme=default] th:last-child {
     @apply relative py-3.5 pl-3 pr-4 sm:pr-6;
 }
-::deep th:not(:first-child):not(:last-child) {
+::deep .quickgrid[theme=default] th:not(:first-child):not(:last-child) {
     @apply px-3 py-3.5;
 }
 
 
-::deep tbody {
+::deep .quickgrid[theme=default] tbody {
     @apply divide-y divide-gray-200 bg-white;
 }
 
-::deep td {
+::deep .quickgrid[theme=default] td {
     @apply whitespace-nowrap text-sm py-4;
 }
-::deep td:first-child {
+::deep .quickgrid[theme=default] td:first-child {
     @apply pl-4 pr-3 font-medium text-gray-900 sm:pl-6;
 }
-::deep td:not(:first-child):not(:last-child) {
+::deep .quickgrid[theme=default] td:not(:first-child):not(:last-child) {
     @apply text-gray-500 px-3;
 }
-::deep td:last-child {
+::deep .quickgrid[theme=default] td:last-child {
     @apply relative pl-3 pr-4 text-right sm:pr-6;
 }

@@ -1,14 +1,15 @@
 #!/bin/bash
 
-appStylesPathOut="./wwwroot/css/bundle.css"
+
+appStylesPathIn="./Styles/styles.css"
+appStylesPathOut="./wwwroot/css/styles.css"
 
 if [ "$APP_MODE" == "Production" ]; then
-  appStylesPathIn="./Styles/main.production.css"
+
   echo "Building for production"
   $TAILWINDCSS -i $appStylesPathIn -o $appStylesPathOut
 
 else
-  appStylesPathIn="./Styles/main.development.css"
   echo "Building for development"
   
   if ! pgrep tailwindcss > /dev/null; then

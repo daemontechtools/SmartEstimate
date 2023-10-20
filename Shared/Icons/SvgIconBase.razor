@@ -1,0 +1,23 @@
+﻿@namespace SmartEstimate.Icons
+
+@inject ILoggerFactory Logger
+
+<svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.5" 
+    stroke="currentColor" 
+    class=@Class
+>
+    @ChildContent
+</svg>
+
+@code {
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter] 
+    public RenderFragment? ChildContent { get; set; }
+}
