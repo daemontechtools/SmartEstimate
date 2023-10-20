@@ -20,9 +20,17 @@
     @apply px-3 py-3.5;
 }
 
+::deep .quickgrid[theme=default] button.col-title {
+    @apply pl-0 hover:bg-inherit;
+}
+
 
 ::deep .quickgrid[theme=default] tbody {
     @apply divide-y divide-gray-200 bg-white;
+}
+
+::deep .quickgrid[theme=default] tbody tr {
+    @apply hover:bg-sky-50 cursor-pointer duration-500;
 }
 
 ::deep .quickgrid[theme=default] td {

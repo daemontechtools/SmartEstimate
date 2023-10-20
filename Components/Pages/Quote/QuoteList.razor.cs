@@ -25,10 +25,14 @@ public partial class QuoteList : ComponentBase, IDisposable
     private RenderFragment? _deleteConfirmation;
     private int? _itemIdToDelete;
 
+    ILogger? _logger;
+
     protected override async Task OnInitializedAsync()
     {
+        _logger = _loggerFactory?.CreateLogger<QuoteList>();
         List<QuoteView> _viewList = await _quoteStore!.ReadableStore.GetAll();
         _quotes = _viewList.AsQueryable();
+        //TODO: Can this be more specific?
         _quoteStore.Storage.OnStateChanged += OnStateChanged!;
         InitDeleteConfirmation();
         IsLoading = false;
@@ -62,6 +66,8 @@ public partial class QuoteList : ComponentBase, IDisposable
 
     private async void OnStateChanged(object sender, EventArgs e)
     {
+        List<QuoteView> _newQuotes = await _quoteStore!.ReadableStore.GetAll();
+        _quotes = _newQuotes.AsQueryable();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -73,8 +79,6 @@ public partial class QuoteList : ComponentBase, IDisposable
 
     private async Task AddQuote()
     {
-        var logger = _loggerFactory.CreateLogger<QuoteList>();
-        logger.LogWarning("Someone has clicked me!");
         QuoteView newQuote = QuoteMock.GenerateRandomQuoteView();
         await _quoteStore!.WritableStore.Create(newQuote);
     }

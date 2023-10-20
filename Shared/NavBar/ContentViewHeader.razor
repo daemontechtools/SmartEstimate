@@ -1,8 +1,4 @@
-﻿@using static Microsoft.AspNetCore.Components.Web.RenderMode
-@rendermode InteractiveServer
-
-
-@namespace SmartEstimate.Nav
+﻿@namespace SmartEstimate.Nav
 
 @inject ILoggerFactory LoggerFactory
 
@@ -31,7 +27,7 @@
                     focus-visible:outline-offset-2 
                     focus-visible:outline-indigo-600
                 "
-                onclick=@TestButton
+                onclick=@HandleButtonClick
             >
                 @ButtonLabel
             </button>
@@ -56,10 +52,5 @@
     private async Task HandleButtonClick()
     {
         await OnClick.InvokeAsync();
-    }
-
-    private void TestButton()
-    {
-        LoggerFactory.CreateLogger("TestButton").LogInformation("I click da button");
     }
 }
