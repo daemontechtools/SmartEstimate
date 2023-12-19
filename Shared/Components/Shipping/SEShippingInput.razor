@@ -20,8 +20,14 @@
     <div class="border-t border-gray-300 mb-4 mt-2"></div>
 
     <div class="flex flex-col">
-      <div class="whitespace-nowrap w-40 text-center p-1 bg-stone-500 text-slate-100 border rounded-md border-slate-600">Address ComboBox</div>
-      @if(!IsAddingShipLocation) {
+      <DmnComboBox 
+        Label="Shipping Address"
+        Class="pb-0"
+        Options=@_shipLocationOptions 
+        @bind-Value=@_currentShipLocationLinkId
+        @onchange=@OnShipLocationChanged
+      />
+      @if(!_isAddingShipLocation) {
         <span 
           onclick=@OnAddressClick
           class="
@@ -37,9 +43,9 @@
     </div>
     <div class="mb-4"></div>
 
-    @if(!IsAddingShipLocation && _project!.ProjectShipLocation is null) {
+    @if(!_isAddingShipLocation && _project!.ProjectShipLocation is null) {
       <span>No Current Shipping Address</span>
-    } else if(IsAddingShipLocation) {
+    } else if(_isAddingShipLocation) {
       <SEShipLocationForm 
         ShipLocation=@_project!.ProjectShipLocation
         OnCancel=@OnShipLocationCancel 
@@ -61,36 +67,50 @@
   [CascadingParameter]
   public EditContext? EditContext { get; set; }
 
-  private IQueryable<ShipLocationView>? ShipLocations;
-  private bool IsAddingShipLocation = false;
+  private IQueryable<ShipLocationView>? _shipLocations;
+  private IQueryable<DmnSelectOption>? _shipLocationOptions;
+  private string? _currentShipLocationLinkId;
+  
+
+  private bool _isAddingShipLocation = false;
     
       
   protected override async Task OnInitializedAsync() {
     _project = EditContext!.Model as ProjectView;
-    _shipLocation = (_project?.ProjectShipLocation is not null)
-      ? _project.ProjectShipLocation
-      : new ShipLocationView("");
-    ShipLocations = await ShipLocationStore.ReadableStore.Get();
+    _currentShipLocationLinkId = _project!.ProjectShipLocation?.LinkID;
+    _shipLocations = await ShipLocationStore.ReadableStore.Get(true);
+    _shipLocationOptions = _shipLocations.Select(
+      sl => new DmnSelectOption {
+        Value = sl.LinkID,
+        Label = sl.LocationName
+      }
+    );
     EditContext.OnFieldChanged += OnFieldChanged;
   }
 
-  private void OnFieldChanged(object? sender, FieldChangedEventArgs e) {
+  void OnFieldChanged(object? sender, FieldChangedEventArgs e) {
     StateHasChanged();
   }
 
   private void OnAddressClick(MouseEventArgs e) {
-    IsAddingShipLocation = true;
+    _isAddingShipLocation = true;
     StateHasChanged();
   }
   
   private void OnShipLocationCancel() {
-    IsAddingShipLocation = false;
+    _isAddingShipLocation = false;
     StateHasChanged();
   }
 
   private void OnShipLocationCreate(ShipLocationView shipLocation) {
     _project!.ProjectShipLocation = shipLocation;
-    IsAddingShipLocation = false;
+    _isAddingShipLocation = false;
     StateHasChanged();
-  }        
+  }      
+
+  private void OnShipLocationChanged(ChangeEventArgs e) {
+    _currentShipLocationLinkId = e.Value?.ToString();
+    Logger.LogInformation($"ShipLocationChanged: {_currentShipLocationLinkId}");
+    StateHasChanged();
+  }  
 }
